@@ -6,12 +6,42 @@ import 'package:flutter_practice_03/theme/colors.dart';
 
 import 'home/widgets/book_item.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  PageController pageController;
+  int currentPage = 0;
+  double viewPortFraction = 0.75;
+
+  @override
+  void initState() {
+    pageController = PageController(initialPage: currentPage, viewportFraction: viewPortFraction);
+    super.initState();
+  }
 
   Expanded buildTabContent(context, List<Book> books) {
+    var xOffset =
+        (MediaQuery.of(context).size.width * (viewPortFraction - 1)) / 2;
     return Expanded(
-      child: TabBarView(
-        children: books.map((b) => BookItemWidget(book: b)).toList(),
+      child: Transform.translate(
+        offset: Offset(xOffset, 0),
+        child: PageView.builder(
+          clipBehavior: Clip.none,
+          allowImplicitScrolling: true,
+          onPageChanged: (pos) {
+            setState(() {
+              currentPage = pos;
+            });
+          },
+          itemCount: books.length,
+          controller: pageController,
+          itemBuilder: (context, index) {
+            return BookItemWidget(book: books[index]);
+          },
+        ),
       ),
     );
   }
@@ -25,7 +55,8 @@ class HomeScreen extends StatelessWidget {
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: UnderlineTabIndicator(
-              borderSide: const BorderSide(width: 2, color: CustomColors.taxi_yellow),
+              borderSide:
+                  const BorderSide(width: 2, color: CustomColors.taxi_yellow),
             ),
             labelPadding: EdgeInsets.symmetric(horizontal: 12),
             tabs: items.map((b) => Tab(text: b.month)).toList()),
