@@ -14,6 +14,6 @@ class CustomTypography {
       bodyText1: GoogleFonts.alata(fontSize: 15),
       bodyText2: GoogleFonts.alata(fontSize: 15),
       button: GoogleFonts.alata(fontSize: 20),
-      caption: GoogleFonts.alata(fontSize: 12),
+      caption: GoogleFonts.alata(fontSize: 13),
       overline: GoogleFonts.alata(fontSize: 10));
 }
