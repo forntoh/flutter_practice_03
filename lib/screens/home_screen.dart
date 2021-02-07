@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/data/data.dart';
@@ -14,33 +16,52 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int currentPage = 0;
-  double viewPortFraction = 0.75;
+  double viewPortFraction = 0.8;
+  double page = 0;
 
   @override
   void initState() {
-    pageController = PageController(initialPage: currentPage, viewportFraction: viewPortFraction);
+    pageController = PageController(
+        initialPage: currentPage, viewportFraction: viewPortFraction);
     super.initState();
   }
 
   Expanded buildTabContent(context, List<Book> books) {
-    var xOffset =
-        (MediaQuery.of(context).size.width * (viewPortFraction - 1)) / 2;
+    var xOffset = (MediaQuery.of(context).size.width * (viewPortFraction - 1)) / 2;
     return Expanded(
       child: Transform.translate(
         offset: Offset(xOffset, 0),
-        child: PageView.builder(
-          clipBehavior: Clip.none,
-          allowImplicitScrolling: true,
-          onPageChanged: (pos) {
-            setState(() {
-              currentPage = pos;
-            });
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification notification) {
+            if (notification is ScrollUpdateNotification) {
+              setState(() {
+                page = pageController.page;
+              });
+            }
+            return true;
           },
-          itemCount: books.length,
-          controller: pageController,
-          itemBuilder: (context, index) {
-            return BookItemWidget(book: books[index]);
-          },
+          child: PageView.builder(
+            clipBehavior: Clip.none,
+            allowImplicitScrolling: true,
+            onPageChanged: (pos) {
+              setState(() {
+                currentPage = pos;
+              });
+            },
+            itemCount: books.length,
+            controller: pageController,
+            itemBuilder: (context, index) {
+              var scale = 0.5;
+              var diff = index - page;
+
+              if (diff < 0)
+                scale = 1;
+              else if (diff >= 0 && diff <= 1)
+                scale = ((1 - diff.abs()) * 0.5) + 0.5;
+
+              return BookItemWidget(book: books[index], scale: scale);
+            },
+          ),
         ),
       ),
     );
