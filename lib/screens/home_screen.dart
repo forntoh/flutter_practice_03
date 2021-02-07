@@ -25,15 +25,10 @@ class HomeScreen extends StatelessWidget {
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: UnderlineTabIndicator(
-              borderSide:
-                  const BorderSide(width: 2, color: CustomColors.taxi_yellow),
+              borderSide: const BorderSide(width: 2, color: CustomColors.taxi_yellow),
             ),
             labelPadding: EdgeInsets.symmetric(horizontal: 12),
-            tabs: items
-                .map((b) => Tab(
-                      text: b.month,
-                    ))
-                .toList()),
+            tabs: items.map((b) => Tab(text: b.month)).toList()),
       ),
     );
   }
