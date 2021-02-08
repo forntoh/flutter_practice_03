@@ -12,11 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  PageController pageController;
   int currentPage = 0;
-  double viewPortFraction = 0.8;
   double miniScale = 0.5;
   double page = 0;
+  PageController pageController;
+  double viewPortFraction = 0.8;
 
   @override
   void initState() {
@@ -37,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
             if (notification is ScrollUpdateNotification) {
               setState(() {
                 page = pageController.page;
-                // debugPrint((page % 1).toString());
               });
             }
             return true;
@@ -88,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildRatingInfo() {
     var oldProgres = page % 1;
     var newProgress = 1.0;
 
@@ -101,6 +99,28 @@ class _HomeScreenState extends State<HomeScreen> {
     else if (oldProgres >= HIGHER_MIN && oldProgres <= 1)
       newProgress = 1 - ((oldProgres - HIGHER_MIN) / LOWER_MAX);
 
+    return Positioned(
+      bottom: 90,
+      right: 20 * (1 - newProgress),
+      child: Opacity(
+        opacity: 1 - newProgress,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(5, (index) {
+            return Icon(
+              index < books[currentPage].rating
+                  ? Icons.star
+                  : Icons.star_border,
+              color: CustomColors.taxi_yellow,
+            );
+          }),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: books.length,
       child: Scaffold(
@@ -136,24 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: Stack(children: [
                     buildTabContent(context, books),
-                    Positioned(
-                      bottom: 90,
-                      right: 20 * (1 - newProgress),
-                      child: Opacity(
-                        opacity: 1 - newProgress,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: List.generate(5, (index) {
-                            return Icon(
-                              index < books[currentPage].rating
-                                  ? Icons.star
-                                  : Icons.star_border,
-                              color: CustomColors.taxi_yellow,
-                            );
-                          }),
-                        ),
-                      ),
-                    ),
+                    buildRatingInfo(),
                   ]),
                 ),
               ],
