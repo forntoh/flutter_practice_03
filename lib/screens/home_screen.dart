@@ -17,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int currentPage = 0;
   double viewPortFraction = 0.8;
+  double miniScale = 0.5;
   double page = 0;
 
   @override
@@ -27,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Expanded buildTabContent(context, List<Book> books) {
-    var xOffset = (MediaQuery.of(context).size.width * (viewPortFraction - 1)) / 2;
+    var itemWidth = MediaQuery.of(context).size.width * viewPortFraction;
+    var xOffset =
+        (MediaQuery.of(context).size.width * (viewPortFraction - 1)) / 2;
     return Expanded(
       child: Transform.translate(
         offset: Offset(xOffset, 0),
@@ -51,15 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: books.length,
             controller: pageController,
             itemBuilder: (context, index) {
-              var scale = 0.5;
+              var scale = miniScale;
               var diff = index - page;
 
               if (diff < 0)
                 scale = 1;
               else if (diff >= 0 && diff <= 1)
-                scale = ((1 - diff.abs()) * 0.5) + 0.5;
+                scale = ((1 - diff.abs()) * miniScale) + miniScale;
 
-              return BookItemWidget(book: books[index], scale: scale);
+              return BookItemWidget(book: books[index], scale: scale, width: itemWidth);
             },
           ),
         ),

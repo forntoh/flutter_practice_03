@@ -5,11 +5,14 @@ import 'package:flutter_practice_03/theme/colors.dart';
 class BookItemWidget extends StatelessWidget {
   const BookItemWidget({
     Key key,
-    @required this.book, this.scale,
+    @required this.book,
+    @required this.scale,
+    @required this.width,
   }) : super(key: key);
 
   final Book book;
   final double scale;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class BookItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: scale * 268,
+              width: scale * width,
               child: AspectRatio(
                 aspectRatio: 9 / 14,
               ),
