@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/data/data.dart';
@@ -92,14 +90,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var oldProgres = page % 1;
     var newProgress = 1.0;
 
-    if (oldProgres >= 0 && oldProgres <= 0.3)
-      newProgress = oldProgres / 0.5;
-    else if (oldProgres >= 0.7 && oldProgres <= 1)
-      newProgress = 1 - ((oldProgres - 0.5) / 0.5);
+    const double LOWER_MAX = 0.3;
+    const double HIGHER_MIN = 0.7;
+
+    if (oldProgres >= 0 && oldProgres <= LOWER_MAX)
+      newProgress = oldProgres / LOWER_MAX;
+    else if (oldProgres >= HIGHER_MIN && oldProgres <= 1)
+      newProgress = 1 - ((oldProgres - HIGHER_MIN) / LOWER_MAX);
 
     return DefaultTabController(
       length: books.length,
