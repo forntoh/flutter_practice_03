@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (notification is ScrollUpdateNotification) {
               setState(() {
                 page = pageController.page;
+                // debugPrint((page % 1).toString());
               });
             }
             return true;
@@ -62,7 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
               else if (diff >= 0 && diff <= 1)
                 scale = ((1 - diff.abs()) * miniScale) + miniScale;
 
-              return BookItemWidget(book: books[index], scale: scale, width: itemWidth);
+              return BookItemWidget(
+                  book: books[index], scale: scale, width: itemWidth);
             },
           ),
         ),
@@ -90,6 +92,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    var oldProgres = page % 1;
+    var newProgress = 1.0;
+
+    if (oldProgres >= 0 && oldProgres <= 0.3)
+      newProgress = oldProgres / 0.5;
+    else if (oldProgres >= 0.7 && oldProgres <= 1)
+      newProgress = 1 - ((oldProgres - 0.5) / 0.5);
+
     return DefaultTabController(
       length: books.length,
       child: Scaffold(
@@ -122,7 +133,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 16),
                 buildTabHeading(books),
-                buildTabContent(context, books),
+                Expanded(
+                  child: Stack(children: [
+                    buildTabContent(context, books),
+                    Positioned(
+                      bottom: 90,
+                      right: 20 * (1 - newProgress),
+                      child: Opacity(
+                        opacity: 1 - newProgress,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: List.generate(5, (index) {
+                            return Icon(
+                              index < books[currentPage].rating
+                                  ? Icons.star
+                                  : Icons.star_border,
+                              color: CustomColors.taxi_yellow,
+                            );
+                          }),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ),
               ],
             ),
           ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
-import 'package:flutter_practice_03/theme/colors.dart';
 
 class BookItemWidget extends StatelessWidget {
   const BookItemWidget({
@@ -42,35 +41,20 @@ class BookItemWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        book.title,
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        book.author,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ],
+                  Text(
+                    book.title,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  Spacer(),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(5, (index) {
-                      return Icon(
-                        index < book.rating ? Icons.star : Icons.star_border,
-                        color: CustomColors.taxi_yellow,
-                      );
-                    }),
-                  )
+                  SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    book.author,
+                    style: Theme.of(context).textTheme.caption,
+                  ),
                 ],
               ),
             )
