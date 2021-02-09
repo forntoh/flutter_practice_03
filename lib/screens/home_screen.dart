@@ -14,17 +14,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentPage = 0;
-  double miniScale = 0.5;
-  double page = 0;
-  PageController pageController;
-  double viewPortFraction = 0.8;
   final ItemScrollController itemScrollController = ItemScrollController();
+  final double miniScale = 0.5;
+  final GlobalKey selectedTab = GlobalKey();
+  final double viewPortFraction = 0.8;
+
+  int _currentPage = 0;
+  double _page = 0;
+  PageController _pageController;
 
   @override
   void initState() {
-    pageController = PageController(
-        initialPage: currentPage, viewportFraction: viewPortFraction);
+    _pageController = PageController(
+        initialPage: _currentPage, viewportFraction: viewPortFraction);
     super.initState();
   }
 
@@ -39,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
           onNotification: (ScrollNotification notification) {
             if (notification is ScrollUpdateNotification) {
               setState(() {
-                page = pageController.page;
+                _page = _pageController.page;
                 itemScrollController.scrollTo(
-                  index: page.round(),
+                  index: _page.round(),
                   duration: Duration(milliseconds: 200),
                   curve: Curves.linear
                 );
@@ -54,14 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
             allowImplicitScrolling: true,
             onPageChanged: (pos) {
               setState(() {
-                currentPage = pos;
+                _currentPage = pos;
               });
             },
             itemCount: books.length,
-            controller: pageController,
+            controller: _pageController,
             itemBuilder: (context, index) {
               var scale = miniScale;
-              var diff = index - page;
+              var diff = index - _page;
 
               if (diff < 0)
                 scale = 1;
@@ -77,12 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  GlobalKey _selectedTab = GlobalKey();
-
   Widget buildTabHeading(List<Book> items) {
     var selectedWidth = 70.0;
-    if (_selectedTab.currentContext != null) {
-      final RenderBox renderBoxRed = _selectedTab.currentContext.findRenderObject();
+    if (selectedTab.currentContext != null) {
+      final RenderBox renderBoxRed = selectedTab.currentContext.findRenderObject();
       selectedWidth = renderBoxRed.size.width;
     }
     return SizedBox(
@@ -100,10 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: EdgeInsets.only(left: defaultPadding),
                     child: index == items.length ? SizedBox(width: MediaQuery.of(context).size.width) :
                       Opacity(
-                        opacity: currentPage == index ? 1 : miniScale,
+                        opacity: _currentPage == index ? 1 : miniScale,
                         child: Text(
                           items[index].month,
-                          key: currentPage == index ? _selectedTab : null,
+                          key: _currentPage == index ? selectedTab : null,
                         ),
                     )
                 );
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildRatingInfo() {
-    var oldProgres = page % 1;
+    var oldProgres = _page % 1;
     var newProgress = 1.0;
 
     const double LOWER_MAX = 0.3;
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSize: MainAxisSize.min,
           children: List.generate(5, (index) {
             return Icon(
-              index < books[currentPage].rating
+              index < books[_currentPage].rating
                   ? Icons.star
                   : Icons.star_border,
               color: CustomColors.taxi_yellow,
