@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/data/data.dart';
 import 'package:flutter_practice_03/model/book.dart';
 import 'package:flutter_practice_03/theme/colors.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../constants.dart';
 import 'home/widgets/book_item.dart';
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double page = 0;
   PageController pageController;
   double viewPortFraction = 0.8;
+  final ItemScrollController itemScrollController = ItemScrollController();
 
   @override
   void initState() {
@@ -38,6 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
             if (notification is ScrollUpdateNotification) {
               setState(() {
                 page = pageController.page;
+                itemScrollController.scrollTo(
+                  index: page.round(),
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.linear
+                );
               });
             }
             return true;
@@ -84,27 +91,27 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
+            child: ScrollablePositionedList.builder(
+              itemCount: items.length + 1,
+              itemScrollController: itemScrollController,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Container(
-                    margin: EdgeInsets.only(
-                        left: index == 0 || index == items.length - 1
-                            ? defaultPadding
-                            : defaultPadding / 2),
-                    child: Opacity(
-                      opacity: currentPage == index ? 1 : miniScale,
-                      child: Text(
-                        items[index].month,
-                        key: currentPage == index ? _selectedTab : null,
-                      )
+                    margin: EdgeInsets.only(left: defaultPadding),
+                    child: index == items.length ? SizedBox(width: MediaQuery.of(context).size.width) :
+                      Opacity(
+                        opacity: currentPage == index ? 1 : miniScale,
+                        child: Text(
+                          items[index].month,
+                          key: currentPage == index ? _selectedTab : null,
+                        ),
                     )
                 );
               },
             ),
           ),
-          Container(
+          AnimatedContainer(
+            duration: Duration(milliseconds: 400),
             margin: EdgeInsets.symmetric(horizontal: defaultPadding),
             height: 2,
             width: selectedWidth,
