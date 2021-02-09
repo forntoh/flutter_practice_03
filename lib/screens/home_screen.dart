@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/data/data.dart';
 import 'package:flutter_practice_03/model/book.dart';
+import 'package:flutter_practice_03/screens/components/custom_bottom_bar.dart';
 import 'package:flutter_practice_03/theme/colors.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -163,6 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
       length: books.length,
       child: Scaffold(
         extendBodyBehindAppBar: true,
+        extendBody: true,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
@@ -172,35 +174,46 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           toolbarHeight: 80,
         ),
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: [CustomColors.violet_darker, CustomColors.violet],
-          )),
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: defaultPadding),
-                  child: Text(
-                    "Your books",
-                    style: Theme.of(context).textTheme.headline4,
+        bottomNavigationBar: CustomBottomAppBar(
+          onTabSelected: (int) {},
+          items: [
+            CustomAppBarItem(icon: CupertinoIcons.book_fill),
+            CustomAppBarItem(icon: CupertinoIcons.search),
+            CustomAppBarItem(icon: CupertinoIcons.bookmark_fill),
+            CustomAppBarItem(icon: CupertinoIcons.person_circle_fill),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height + 60,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
+              colors: [CustomColors.violet_darker, CustomColors.violet],
+            )),
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: Text(
+                      "Your books",
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                ),
-                SizedBox(height: 16),
-                buildTabHeading(books),
-                Expanded(
-                  child: Stack(children: [
-                    buildTabContent(context, books),
-                    buildRatingInfo(),
-                  ]),
-                ),
-              ],
+                  SizedBox(height: 16),
+                  buildTabHeading(books),
+                  Expanded(
+                    child: Stack(children: [
+                      buildTabContent(context, books),
+                      buildRatingInfo(),
+                    ]),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
