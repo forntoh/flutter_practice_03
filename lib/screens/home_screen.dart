@@ -4,6 +4,7 @@ import 'package:flutter_practice_03/data/data.dart';
 import 'package:flutter_practice_03/model/book.dart';
 import 'package:flutter_practice_03/theme/colors.dart';
 
+import '../constants.dart';
 import 'home/widgets/book_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       height: 24,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: defaultPadding - 10),
         child: TabBar(
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.label,
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Positioned(
       bottom: 90,
-      right: 20 * (1 - newProgress),
+      right: defaultPadding * (1 - newProgress),
       child: Opacity(
         opacity: 1 - newProgress,
         child: Row(
@@ -128,7 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          leading: Icon(CupertinoIcons.bars),
+          leading: Padding(
+            padding: const EdgeInsets.only(left: defaultPadding),
+            child: Icon(CupertinoIcons.bars),
+          ),
           toolbarHeight: 80,
         ),
         body: Container(
@@ -145,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: EdgeInsets.symmetric(horizontal: defaultPadding),
                   child: Text(
                     "Your books",
                     style: Theme.of(context).textTheme.headline4,

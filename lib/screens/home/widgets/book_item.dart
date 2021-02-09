@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
 
+import '../../../constants.dart';
+
 class BookItemWidget extends StatelessWidget {
   const BookItemWidget({
     Key key,
@@ -16,7 +18,7 @@ class BookItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
+      padding: const EdgeInsets.fromLTRB(defaultPadding, defaultPadding, 0, defaultPadding),
       child: Opacity(
         opacity: scale,
         child: Column(
@@ -40,7 +42,7 @@ class BookItemWidget extends StatelessWidget {
                       fit: BoxFit.cover, image: NetworkImage(book.coverArt))),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: defaultPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
