@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: defaultPadding),
             child: Icon(CupertinoIcons.bars),
           ),
-          toolbarHeight: 80,
+          toolbarHeight: appBarHeight,
         ),
         bottomNavigationBar: CustomBottomAppBar(
           onTabSelected: (int) {},

@@ -137,7 +137,7 @@ class _HomeBodyState extends State<HomeBody> {
       newProgress = 1 - ((oldProgres - HIGHER_MIN) / LOWER_MAX);
 
     return Positioned(
-      bottom: 90,
+      bottom: bottomAppBarHeight + (defaultPadding * 2),
       right: defaultPadding * (1 - newProgress),
       child: Opacity(
         opacity: 1 - newProgress,
@@ -149,6 +149,7 @@ class _HomeBodyState extends State<HomeBody> {
                   ? Icons.star
                   : Icons.star_border,
               color: CustomColors.taxi_yellow,
+              size: 18,
             );
           }),
         ),
@@ -158,38 +159,35 @@ class _HomeBodyState extends State<HomeBody> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height + 60,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
-          colors: [CustomColors.violet_darker, CustomColors.violet],
-        )),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Text(
-                  "Your books",
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-              ),
-              SizedBox(height: 16),
-              buildTabHeading(books),
-              Expanded(
-                child: Stack(children: [
-                  buildTabContent(context, books),
-                  buildRatingInfo(),
-                ]),
-              ),
-            ],
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.centerRight,
+        end: Alignment.centerLeft,
+        colors: [CustomColors.violet_darker, CustomColors.violet],
+      )),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: appBarHeight),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+            child: Text(
+              "Your books",
+              style: Theme.of(context).textTheme.headline3,
+            ),
           ),
-        ),
+          SizedBox(height: 16),
+          buildTabHeading(books),
+          Expanded(
+            child: Stack(children: [
+              buildTabContent(context, books),
+              buildRatingInfo(),
+            ]),
+          ),
+        ],
       ),
     );
   }
