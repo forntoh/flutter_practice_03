@@ -116,8 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 2,
             width: selectedWidth,
             decoration: BoxDecoration(
-                color: CustomColors.taxi_yellow,
-                borderRadius: BorderRadius.circular(2)),
+              color: CustomColors.taxi_yellow,
+              borderRadius: BorderRadius.circular(2),
+            ),
           )
         ],
       ),
