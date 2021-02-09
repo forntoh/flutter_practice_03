@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/data/data.dart';
 import 'package:flutter_practice_03/model/book.dart';
+import 'package:flutter_practice_03/screens/widgets/rating_bar.dart';
 import 'package:flutter_practice_03/theme/colors.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -141,18 +142,7 @@ class _HomeBodyState extends State<HomeBody> {
       right: defaultPadding * (1 - newProgress),
       child: Opacity(
         opacity: 1 - newProgress,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(5, (index) {
-            return Icon(
-              index < books[_currentPage].rating
-                  ? Icons.star
-                  : Icons.star_border,
-              color: CustomColors.taxi_yellow,
-              size: 18,
-            );
-          }),
-        ),
+        child: RatingBar(rating: books[_currentPage].rating,),
       ),
     );
   }

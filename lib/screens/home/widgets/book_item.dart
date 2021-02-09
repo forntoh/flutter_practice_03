@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
+import 'package:flutter_practice_03/screens/widgets/book_cover.dart';
 
 import '../../../constants.dart';
 
@@ -25,22 +26,7 @@ class BookItemWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: scale * width,
-              child: AspectRatio(
-                aspectRatio: 9 / 14,
-              ),
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: 12,
-                        offset: Offset(5, 2),
-                        color: Colors.black.withAlpha(60))
-                  ],
-                  borderRadius: BorderRadius.circular(5),
-                  image: DecorationImage(
-                      fit: BoxFit.cover, image: NetworkImage(book.coverArt))),
-            ),
+            BookCover(scale: scale, width: width, book: book),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: defaultPadding),
               child: Column(
