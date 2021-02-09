@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/data/data.dart';
 import 'package:flutter_practice_03/screens/components/custom_bottom_bar.dart';
 
-import '../constants.dart';
-import 'home/widgets/home_body.dart';
+import '../../constants.dart';
+import 'widgets/home_body.dart';
 
 class HomeScreen extends StatelessWidget {
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_practice_03/screens/home_screen.dart';
+import 'package:flutter_practice_03/screens/home/home_screen.dart';
 import 'package:flutter_practice_03/theme/custom_theme.dart';
 
 void main() {

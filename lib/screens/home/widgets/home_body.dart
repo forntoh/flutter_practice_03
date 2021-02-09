@@ -162,12 +162,7 @@ class _HomeBodyState extends State<HomeBody> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.centerRight,
-        end: Alignment.centerLeft,
-        colors: [CustomColors.violet_darker, CustomColors.violet],
-      )),
+      decoration: CustomColors.gradientDecoration,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
