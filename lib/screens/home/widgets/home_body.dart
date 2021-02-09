@@ -16,7 +16,7 @@ class _HomeBodyState extends State<HomeBody> {
   final ItemScrollController itemScrollController = ItemScrollController();
   final double miniScale = 0.5;
   final GlobalKey selectedTab = GlobalKey();
-  final double viewPortFraction = 0.8;
+  final double viewPortFraction = 0.75;
 
   int _currentPage = 0;
   double _page = 0;
@@ -176,7 +176,7 @@ class _HomeBodyState extends State<HomeBody> {
                 margin: EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: Text(
                   "Your books",
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headline3,
                 ),
               ),
               SizedBox(height: 16),
