@@ -70,20 +70,49 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  GlobalKey _selectedTab = GlobalKey();
+
   Widget buildTabHeading(List<Book> items) {
-    return Container(
+    var selectedWidth = 70.0;
+    if (_selectedTab.currentContext != null) {
+      final RenderBox renderBoxRed = _selectedTab.currentContext.findRenderObject();
+      selectedWidth = renderBoxRed.size.width;
+    }
+    return SizedBox(
       height: 24,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: defaultPadding - 10),
-        child: TabBar(
-            isScrollable: true,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicator: UnderlineTabIndicator(
-              borderSide:
-                  const BorderSide(width: 2, color: CustomColors.taxi_yellow),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: items.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                    margin: EdgeInsets.only(
+                        left: index == 0 || index == items.length - 1
+                            ? defaultPadding
+                            : defaultPadding / 2),
+                    child: Opacity(
+                      opacity: currentPage == index ? 1 : miniScale,
+                      child: Text(
+                        items[index].month,
+                        key: currentPage == index ? _selectedTab : null,
+                      )
+                    )
+                );
+              },
             ),
-            labelPadding: EdgeInsets.symmetric(horizontal: 12),
-            tabs: items.map((b) => Tab(text: b.month)).toList()),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+            height: 2,
+            width: selectedWidth,
+            decoration: BoxDecoration(
+                color: CustomColors.taxi_yellow,
+                borderRadius: BorderRadius.circular(2)),
+          )
+        ],
       ),
     );
   }
