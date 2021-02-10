@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
-import 'package:flutter_practice_03/screens/widgets/book_cover.dart';
 import 'package:flutter_practice_03/screens/widgets/custom_bottom_bar.dart';
 import 'package:flutter_practice_03/theme/colors.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../constants.dart';
 import 'widgets/book_info_box.dart';
 import 'widgets/editor_review_box.dart';
+import 'widgets/related_books_list.dart';
 
 class DetailScreen extends StatelessWidget {
   final Book book;
@@ -59,44 +58,6 @@ class DetailScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class RelatedBooksList extends StatelessWidget {
-  const RelatedBooksList({
-    Key key,
-    @required this.book,
-  }) : super(key: key);
-
-  final Book book;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      clipBehavior: Clip.none,
-      padding: const EdgeInsets.fromLTRB(defaultPadding, 0,
-          defaultPadding, bottomAppBarHeight + defaultPadding),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: book.books.asMap().entries.map((e) => Row(
-          children: [
-            BookCover(
-              book: e.value,
-              width: 120,
-              onTap: (b) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DetailScreen(book: e.value)),
-                );
-              },
-            ),
-            if (e.key != book.books.length - 1)
-              SizedBox(width: defaultPadding / 2)
-          ],
-        )).toList(),
       ),
     );
   }

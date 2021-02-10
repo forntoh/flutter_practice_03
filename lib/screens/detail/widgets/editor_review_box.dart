@@ -46,6 +46,7 @@ class EditorReviewBox extends StatelessWidget {
             children: [
               CircleAvatar(
                 minRadius: defaultPadding + 5,
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
                 backgroundImage: NetworkImage('https://randomuser.me/api/portraits/women/${Random().nextInt(90) + 10}.jpg'),
               ),
               SizedBox(width: defaultPadding / 2),
