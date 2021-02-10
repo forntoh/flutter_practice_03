@@ -5,7 +5,7 @@ import 'package:flutter_practice_03/screens/detail/detail_screen.dart';
 class BookCover extends StatelessWidget {
   const BookCover({
     Key key,
-    @required this.scale,
+    this.scale = 1,
     @required this.width,
     @required this.book,
   }) : super(key: key);

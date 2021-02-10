@@ -7,6 +7,7 @@ final books = [
       month: 'This month',
       coverArt: 'https://i0.wp.com/chrisgillbooks.com/wp-content/uploads/2018/03/less-than-zaro.jpg?fit=880%2C1333&quality=95',
       rating: 5,
+      category: ['Transgressive', 'Fiction'],
     ),
     Book(
       title: "Trainspotting",

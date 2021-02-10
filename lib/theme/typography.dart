@@ -11,7 +11,7 @@ class CustomTypography {
       headline6: GoogleFonts.alata(fontSize: 20, fontWeight: FontWeight.bold),
       subtitle1: GoogleFonts.alata(fontSize: 16, fontWeight: FontWeight.bold),
       subtitle2: GoogleFonts.alata(fontSize: 14, fontWeight: FontWeight.bold),
-      bodyText1: GoogleFonts.alata(fontSize: 15),
+      bodyText1: GoogleFonts.alata(fontSize: 15, fontWeight: FontWeight.w100, color: Colors.white70),
       bodyText2: GoogleFonts.alata(fontSize: 15),
       button: GoogleFonts.alata(fontSize: 20),
       caption: GoogleFonts.alata(fontSize: 13),
