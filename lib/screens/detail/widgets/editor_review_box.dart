@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
 
@@ -44,7 +46,7 @@ class EditorReviewBox extends StatelessWidget {
             children: [
               CircleAvatar(
                 minRadius: defaultPadding + 5,
-                backgroundImage: NetworkImage('https://randomuser.me/api/portraits/women/17.jpg'),
+                backgroundImage: NetworkImage('https://randomuser.me/api/portraits/women/${Random().nextInt(90) + 10}.jpg'),
               ),
               SizedBox(width: defaultPadding / 2),
               Column(

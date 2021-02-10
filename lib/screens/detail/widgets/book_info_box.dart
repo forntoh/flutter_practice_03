@@ -25,7 +25,7 @@ class BookInfoBox extends StatelessWidget {
             scale: 1,
             width: 100,
           ),
-          SizedBox(width: defaultPadding / 2),
+          SizedBox(width: defaultPadding / 1.5),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

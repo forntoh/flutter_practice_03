@@ -6,7 +6,8 @@ class BookCover extends StatelessWidget {
     Key key,
     this.scale = 1,
     @required this.width,
-    @required this.book, this.onTap,
+    @required this.book,
+    this.onTap,
   }) : super(key: key);
 
   final double scale;
@@ -17,7 +18,9 @@ class BookCover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap(book),
+      onTap: () {
+        if (onTap != null) onTap(book);
+      },
       child: Container(
         width: scale * width,
         child: AspectRatio(

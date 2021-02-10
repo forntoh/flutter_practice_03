@@ -4,6 +4,7 @@ import 'package:flutter_practice_03/model/book.dart';
 import 'package:flutter_practice_03/screens/widgets/book_cover.dart';
 import 'package:flutter_practice_03/screens/widgets/custom_bottom_bar.dart';
 import 'package:flutter_practice_03/theme/colors.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../constants.dart';
 import 'widgets/book_info_box.dart';
@@ -47,30 +48,55 @@ class DetailScreen extends StatelessWidget {
               BookInfoBox(book: book),
               EditorReviewBox(book: book),
               Padding(
-                padding: const EdgeInsets.fromLTRB(defaultPadding, 0, defaultPadding, defaultPadding),
-                child: Text('More from ${book.author}',
+                padding: const EdgeInsets.fromLTRB(
+                    defaultPadding, 0, defaultPadding, defaultPadding),
+                child: Text(
+                  'More from ${book.author}',
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
-              SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(defaultPadding, 0, defaultPadding, bottomAppBarHeight + defaultPadding),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    BookCover(book: book, width: 120,),
-                    SizedBox(width: defaultPadding / 2),
-                    BookCover(book: book, width: 120,),
-                    SizedBox(width: defaultPadding / 2,),
-                    BookCover(book: book, width: 120,),
-                    SizedBox(width: defaultPadding / 2,),
-                    BookCover(book: book, width: 120,),
-                  ],
-                ),
-              )
+              RelatedBooksList(book: book),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class RelatedBooksList extends StatelessWidget {
+  const RelatedBooksList({
+    Key key,
+    @required this.book,
+  }) : super(key: key);
+
+  final Book book;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      clipBehavior: Clip.none,
+      padding: const EdgeInsets.fromLTRB(defaultPadding, 0,
+          defaultPadding, bottomAppBarHeight + defaultPadding),
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: book.books.asMap().entries.map((e) => Row(
+          children: [
+            BookCover(
+              book: e.value,
+              width: 120,
+              onTap: (b) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DetailScreen(book: e.value)),
+                );
+              },
+            ),
+            if (e.key != book.books.length - 1)
+              SizedBox(width: defaultPadding / 2)
+          ],
+        )).toList(),
       ),
     );
   }
