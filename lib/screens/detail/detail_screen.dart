@@ -4,6 +4,7 @@ import 'package:flutter_practice_03/model/book.dart';
 import 'package:flutter_practice_03/screens/widgets/book_cover.dart';
 import 'package:flutter_practice_03/screens/widgets/custom_bottom_bar.dart';
 import 'package:flutter_practice_03/screens/widgets/rating_bar.dart';
+import 'package:flutter_practice_03/theme/colors.dart';
 
 import '../../constants.dart';
 
@@ -35,39 +36,43 @@ class DetailScreen extends StatelessWidget {
           CustomAppBarItem(icon: CupertinoIcons.person_circle_fill),
         ],
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Row(
-                  children: [
-                    BookCover(book: book, scale: 1, width: 100,),
-                    SizedBox(width: defaultPadding / 2),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          book.title,
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text(
-                          book.author,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
+      body: Container(
+        decoration: CustomColors.gradientDecoration,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+                  child: Row(
+                    children: [
+                      BookCover(book: book, scale: 1, width: 100,),
+                      SizedBox(width: defaultPadding / 2),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            book.title,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            book.author,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          RatingBar(rating: book.rating)
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

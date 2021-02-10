@@ -20,7 +20,7 @@ class RatingBar extends StatelessWidget {
           child: Icon(
             index < rating
                 ? CupertinoIcons.star_fill
-                : CupertinoIcons.star,
+                : CupertinoIcons.star ,
             color: CustomColors.taxi_yellow,
             size: 18,
           ),
