@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
-import 'package:flutter_practice_03/screens/detail/detail_screen.dart';
 
 class BookCover extends StatelessWidget {
   const BookCover({
     Key key,
     this.scale = 1,
     @required this.width,
-    @required this.book,
+    @required this.book, this.onTap,
   }) : super(key: key);
 
   final double scale;
   final double width;
   final Book book;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DetailScreen(book: book)),
-        );
-      },
+      onTap: () => onTap(book),
       child: Container(
         width: scale * width,
         child: AspectRatio(

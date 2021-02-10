@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
+import 'package:flutter_practice_03/screens/detail/detail_screen.dart';
 import 'package:flutter_practice_03/screens/widgets/book_cover.dart';
 
 import '../../../constants.dart';
@@ -26,7 +27,12 @@ class BookItemWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BookCover(scale: scale, width: width, book: book),
+            BookCover(scale: scale, width: width, book: book, onTap: (b) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DetailScreen(book: b)),
+              );
+            },),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: defaultPadding),
               child: Column(
