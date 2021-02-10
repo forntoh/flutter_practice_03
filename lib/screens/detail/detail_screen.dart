@@ -2,12 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
 import 'package:flutter_practice_03/screens/widgets/books_bottom_nav_bar.dart';
-import 'package:flutter_practice_03/theme/colors.dart';
 
 import '../../constants.dart';
-import 'widgets/book_info_box.dart';
-import 'widgets/editor_review_box.dart';
-import 'widgets/related_books_list.dart';
+import 'widgets/detail_body.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key key, this.book}) : super(key: key);
@@ -30,40 +27,6 @@ class DetailScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BooksBottomNavBar(),
       body: DetailsScreenBody(book: book),
-    );
-  }
-}
-
-class DetailsScreenBody extends StatelessWidget {
-  const DetailsScreenBody({
-    Key key,
-    @required this.book,
-  }) : super(key: key);
-
-  final Book book;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: CustomColors.gradientDecoration,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: appBarHeight),
-            BookInfoBox(book: book),
-            EditorReviewBox(book: book),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(defaultPadding, 0, defaultPadding, defaultPadding),
-              child: Text(
-                'More from ${book.author}',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-            ),
-            RelatedBooksList(book: book),
-          ],
-        ),
-      ),
     );
   }
 }
