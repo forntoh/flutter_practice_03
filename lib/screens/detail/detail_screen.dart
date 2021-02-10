@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/model/book.dart';
+import 'package:flutter_practice_03/screens/widgets/books_app_bar.dart';
 import 'package:flutter_practice_03/screens/widgets/books_bottom_nav_bar.dart';
 
-import '../../constants.dart';
 import 'widgets/detail_body.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -16,15 +16,7 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: defaultPadding / 2),
-          child: BackButton(),
-        ),
-        toolbarHeight: appBarHeight,
-      ),
+      appBar: BooksAppBar(),
       bottomNavigationBar: BooksBottomNavBar(),
       body: DetailsScreenBody(book: book),
     );
