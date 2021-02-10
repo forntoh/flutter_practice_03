@@ -10,9 +10,9 @@ import 'widgets/editor_review_box.dart';
 import 'widgets/related_books_list.dart';
 
 class DetailScreen extends StatelessWidget {
-  final Book book;
-
   const DetailScreen({Key key, this.book}) : super(key: key);
+
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -37,26 +37,39 @@ class DetailScreen extends StatelessWidget {
           CustomAppBarItem(icon: CupertinoIcons.person_circle_fill),
         ],
       ),
-      body: Container(
-        decoration: CustomColors.gradientDecoration,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: appBarHeight),
-              BookInfoBox(book: book),
-              EditorReviewBox(book: book),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                    defaultPadding, 0, defaultPadding, defaultPadding),
-                child: Text(
-                  'More from ${book.author}',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
+      body: DetailsScreenBody(book: book),
+    );
+  }
+}
+
+class DetailsScreenBody extends StatelessWidget {
+  const DetailsScreenBody({
+    Key key,
+    @required this.book,
+  }) : super(key: key);
+
+  final Book book;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: CustomColors.gradientDecoration,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: appBarHeight),
+            BookInfoBox(book: book),
+            EditorReviewBox(book: book),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(defaultPadding, 0, defaultPadding, defaultPadding),
+              child: Text(
+                'More from ${book.author}',
+                style: Theme.of(context).textTheme.headline6,
               ),
-              RelatedBooksList(book: book),
-            ],
-          ),
+            ),
+            RelatedBooksList(book: book),
+          ],
         ),
       ),
     );

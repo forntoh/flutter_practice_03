@@ -7,7 +7,7 @@ import 'typography.dart';
 class CustomTheme {
   static ThemeData get myTheme {
     return ThemeData(
-      primaryColor: CustomColors.blue_black,
+      primaryColor: CustomColors.violet_darker,
       accentColor: CustomColors.taxi_yellow,
       scaffoldBackgroundColor: Colors.transparent,
       textTheme: CustomTypography.textTheme,

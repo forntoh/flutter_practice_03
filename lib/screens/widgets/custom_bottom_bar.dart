@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/theme/colors.dart';
 
@@ -59,25 +61,36 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
               item: widget.items[index],
               onPressed: _updateIndex,
             ));
-    return Container(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-        height: CustomBottomAppBar.height,
-        decoration: BoxDecoration(
-          color: Colors.white12,
-          boxShadow: [BoxShadow(
-            color: Colors.black12,
-            offset: Offset(0, 2),
-            blurRadius: 8,
-            spreadRadius: 5
-          )]
+    return Stack(
+      children: [
+        Container(
+          height: CustomBottomAppBar.height,
+          child: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                child: Container(color: Theme.of(context).primaryColor.withOpacity(0.8)),
+              ),
+          ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: items,
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+          height: CustomBottomAppBar.height,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.18),
+            boxShadow: [BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0, 2),
+              blurRadius: 8,
+              spreadRadius: 5
+            )]
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: items,
+          ),
         ),
-      ),
+      ]
     );
   }
 }
