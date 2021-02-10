@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_03/data/data.dart';
+import 'package:flutter_practice_03/screens/widgets/books_bottom_nav_bar.dart';
 import 'package:flutter_practice_03/screens/widgets/custom_bottom_bar.dart';
 
 import '../../constants.dart';
@@ -22,15 +23,7 @@ class HomeScreen extends StatelessWidget {
         ),
         toolbarHeight: appBarHeight,
       ),
-      bottomNavigationBar: CustomBottomAppBar(
-        onTabSelected: (int) {},
-        items: [
-          CustomAppBarItem(icon: CupertinoIcons.book_fill),
-          CustomAppBarItem(icon: CupertinoIcons.search),
-          CustomAppBarItem(icon: CupertinoIcons.bookmark_fill),
-          CustomAppBarItem(icon: CupertinoIcons.person_circle_fill),
-        ],
-      ),
+      bottomNavigationBar: BooksBottomNavBar(),
       body: HomeBody(),
     );
   }
