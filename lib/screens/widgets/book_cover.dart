@@ -17,25 +17,28 @@ class BookCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (onTap != null) onTap(book);
-      },
-      child: Container(
-        width: scale * width,
-        child: AspectRatio(
-          aspectRatio: 9 / 14,
+    return Hero(
+      tag: book.coverArt,
+      child: GestureDetector(
+        onTap: () {
+          if (onTap != null) onTap(book);
+        },
+        child: Container(
+          width: scale * width,
+          child: AspectRatio(
+            aspectRatio: 9 / 14,
+          ),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 12,
+                    offset: Offset(5, 2),
+                    color: Colors.black.withOpacity(0.4))
+              ],
+              borderRadius: BorderRadius.circular(5),
+              image: DecorationImage(
+                  fit: BoxFit.cover, image: NetworkImage(book.coverArt))),
         ),
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: 12,
-                  offset: Offset(5, 2),
-                  color: Colors.black.withOpacity(0.4))
-            ],
-            borderRadius: BorderRadius.circular(5),
-            image: DecorationImage(
-                fit: BoxFit.cover, image: NetworkImage(book.coverArt))),
       ),
     );
   }

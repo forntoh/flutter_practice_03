@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_03/data/data.dart';
 import 'package:flutter_practice_03/screens/widgets/books_bottom_nav_bar.dart';
-import 'package:flutter_practice_03/screens/widgets/custom_bottom_bar.dart';
 
 import '../../constants.dart';
 import 'widgets/home_body.dart';

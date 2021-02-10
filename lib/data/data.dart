@@ -109,4 +109,15 @@ final books = [
         
       ],
     ),
+    Book(
+      title: 'The Informers',
+      author: 'Bret Easton Ellis',
+      month: 'This month',
+      coverArt: 'https://m.media-amazon.com/images/I/41VgdbKHg8L.jpg',
+      rating: 4,
+      category: ['Horror', 'Fiction', 'Psyco'],
+      books: [
+        
+      ],
+    ),
 ];
