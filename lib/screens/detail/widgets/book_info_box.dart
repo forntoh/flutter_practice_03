@@ -26,35 +26,37 @@ class BookInfoBox extends StatelessWidget {
             width: 100,
           ),
           SizedBox(width: defaultPadding / 1.5),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                book.title,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              SizedBox(
-                height: 2,
-              ),
-              Opacity(
-                opacity: 0.8,
-                child: Text(
-                  book.author,
-                  style: Theme.of(context).textTheme.bodyText1,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  book.title,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              RatingBar(rating: book.rating),
-              SingleChildScrollView(
-                padding: EdgeInsets.only(top: 12),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: book.category.map((c) => CustomChip(label: c)).toList(),
+                SizedBox(
+                  height: 2,
                 ),
-              ),
-            ],
+                Opacity(
+                  opacity: 0.8,
+                  child: Text(
+                    book.author,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                RatingBar(rating: book.rating),
+                SingleChildScrollView(
+                  padding: EdgeInsets.only(top: 12),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: book.category.map((c) => CustomChip(label: c)).toList(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
